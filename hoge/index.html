@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>hoge</title>
+    <script>
+      function clickButton(){
+        window.localStorage.setItem('myCat', document.querySelector('#hogeText').value);
+      }
+    </script>
+  </head>
+  <body>
+    hoge
+    <p>
+    <input type="text" id="hogeText">
+    <button onclick="clickButton();">button</button>
+  </body>
+</html>

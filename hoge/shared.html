@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      piyo
+    </title>
+  </head>
+  <body>
+    piyo
+    <button id="hogeButton">button</button>
+    <script>
+      (function() {
+        document.querySelector('#hogeButton').addEventListener('click', function() {
+          window.sharedStorage.set('hoge-shared', 'hogehoge', { ignoreIfPresent: true, });
+        });
+      })();
+    </script>
+  </body>
+</html>

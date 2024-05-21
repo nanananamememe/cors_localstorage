@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      piyo
+    </title>
+  </head>
+  <body>
+    piyo
+    <iframe id="saveSearchCondifions" src="https://hoge.localhost/iframe.html"></iframe>
+    <button id="hogeButton">hoge</button>
+    <script>
+      (function() {
+        var saveSearchCondifions = document.querySelector('#saveSearchCondifions').contentWindow;
+        document.querySelector('#hogeButton').addEventListener('click', function() {
+          // localstorageの値の取得を要求するメッセージ送信
+          saveSearchCondifions.postMessage('get','https://hoge.localhost');
+        });
+      })();
+
+      window.addEventListener('message', function(event) {
+        // 送信元が指定のオリジンと一致していれば処理を行う
+        window.alert(event.data);
+      });
+
+    </script>
+
+  </body>
+</html>

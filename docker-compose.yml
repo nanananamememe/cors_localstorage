@@ -1,0 +1,71 @@
+version: '3.3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    environment:
+      - "DHPARAM_GENERATION=false"
+    privileged: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
+    networks:
+      my-nw:
+
+  hoge:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - VIRTUAL_HOST=hoge.localhost
+      - CERT_NAME=server
+    volumes:
+      - ./hoge:/var/www/html
+    networks:
+      my-nw:
+
+  piyo:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - VIRTUAL_HOST=piyo.localhost
+      - CERT_NAME=server
+    volumes:
+      - ./piyo:/var/www/html
+    networks:
+      my-nw:
+
+  hoge2:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - VIRTUAL_HOST=hoge.app.localhost
+      - CERT_NAME=server
+    volumes:
+      - ./hoge_app:/var/www/html
+    networks:
+      my-nw:
+
+  piyo2:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - VIRTUAL_HOST=piyo.app.localhost
+      - CERT_NAME=server
+    volumes:
+      - ./piyo_app:/var/www/html
+    networks:
+      my-nw:
+
+volumes:
+  proxy:
+
+networks:
+    my-nw:
+        external: true
